@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\ProductPageSearchModel\Communication\Plugin\PageDataExpander;
 
+use FondOfSpryker\Shared\ProductPageSearchModel\ProductPageSearchModelConstants;
 use Generated\Shared\Search\PageIndexMap;
 use Generated\Shared\Transfer\ProductPageSearchTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
@@ -19,11 +20,11 @@ class ModelDataExpanderPlugin extends AbstractPlugin implements ProductPageDataE
      */
     public function expandProductPageData(array $productData, ProductPageSearchTransfer $productAbstractPageSearchTransfer): void
     {
-        if (!array_key_exists('attributes', $productData)) {
+        if (!array_key_exists(ProductPageSearchModelConstants::ATTRIBUTES, $productData)) {
             return;
         }
 
-        $attributesData = \json_decode($productData['attributes'], true);
+        $attributesData = \json_decode($productData[ProductPageSearchModelConstants::ATTRIBUTES], true);
 
         if (!array_key_exists(PageIndexMap::MODEL, $attributesData)) {
             return;
